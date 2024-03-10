@@ -21,7 +21,7 @@ services:
       - "3443:443"
       - "3443:443/udp"
     volumes:
-      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy/caddyfile/:/etc/caddy
       - ./caddy/web/:/usr/share/caddy
       - ./caddy/data/:/data/caddy/
       - ./caddy/config/:/config/caddy
