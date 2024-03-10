@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  v2ray:
+    image: ghcr.io/getimages/v2fly-core:v4.45.2
+    restart: always
+    environment:
+      - v2ray.vmess.aead.forced=false
+    volumes:
+      - ./v2ray/config/:/etc/v2ray/
+      - ./v2ray/logs:/var/log/v2ray/
+    ports:
+      - "127.0.0.1:1310:1310"
+      - "127.0.0.1:1310:1310/udp"
+  caddy:
+    image: ghcr.io/getimages/caddy:2.6.2-alpine
+    restart: always
+    ports:
+      - "3080:80"
+      - "3080:80/udp"
+      - "3443:443"
+      - "3443:443/udp"
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy/web/:/usr/share/caddy
+      - ./caddy/data/:/data/caddy/
+      - ./caddy/config/:/config/caddy
